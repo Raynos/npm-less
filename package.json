@@ -1,0 +1,55 @@
+{
+  "name": "npm-less",
+  "version": "0.1.0",
+  "description": "Fix LESS to import a la node require algorithm",
+  "keywords": [],
+  "author": "Raynos <raynos2@gmail.com>",
+  "repository": "git://github.com/Colingo/npm-less.git",
+  "main": "index",
+  "homepage": "https://github.com/Colingo/npm-less",
+  "contributors": [
+    {
+      "name": "Raynos"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/Colingo/npm-less/issues",
+    "email": "raynos2@gmail.com"
+  },
+  "dependencies": {
+    "request": "~2.21.0",
+    "resolve": "~0.3.1",
+    "less": "~1.4.0-b4"
+  },
+  "devDependencies": {
+    "tape": "~1.0.2",
+    "routes-router": "~0.1.2",
+    "ecstatic": "~0.4.2"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/Colingo/npm-less/raw/master/LICENSE"
+    }
+  ],
+  "scripts": {
+    "test": "node ./test/index.js"
+  },
+  "testling": {
+    "files": "test/index.js",
+    "browsers": [
+      "ie/8..latest",
+      "firefox/16..latest",
+      "firefox/nightly",
+      "chrome/22..latest",
+      "chrome/canary",
+      "opera/12..latest",
+      "opera/next",
+      "safari/5.1..latest",
+      "ipad/6.0..latest",
+      "iphone/6.0..latest",
+      "android-browser/4.2..latest"
+    ]
+  },
+  "private": true
+}
