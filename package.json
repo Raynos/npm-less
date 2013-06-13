@@ -24,7 +24,7 @@
   "devDependencies": {
     "tape": "~1.0.2",
     "routes-router": "~0.1.2",
-    "ecstatic": "~0.4.2"
+    "ecstatic": "~0.4.5"
   },
   "licenses": [
     {

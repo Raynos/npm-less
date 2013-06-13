@@ -1,59 +1,41 @@
-var fs = require("fs")
+var resolve = require("resolve")
 var path = require("path")
+var url = require("url")
 
-var Parser = require("./index")
-var getLocation = require("./lib/get-location")
+var less = require("./less")
+var CompiledFiles = require("./lib/compiled-files")
 
-module.exports = ServeLess
-
-function ServeLess(root) {
-    return function serve(req, res, params) {
-        var appName = params.appName
-
-        res.setHeader("content-type", "text/css")
-
-        getLocation(root, appName, "less", bundleLess)
-
-        function bundleLess(err, uri) {
+// /css/:appName
+module.exports = CompiledFiles({
+    compile: function (location, opts, callback) {
+        resolve(location, {
+            extensions: [".less"]
+        }, function (err, fileUri) {
             if (err) {
-                res.statusCode = 404
-                return res.end("404 Not Found")
+                return callback(err)
             }
 
-            less(uri, sendPayload)
-        }
+            less(fileUri, function (err, payload) {
+                if (err) {
+                    return callback(err)
+                }
 
-        function sendPayload(err, payload) {
-            if (err) {
-                payload = "body:before{ color: red; content: " +
-                    JSON.stringify(JSON.stringify(err)) + "; }"
-
-                return res.end(payload)
-            }
-
-            try {
-                res.end(payload.toCSS())
-            } catch (error) {
-                payload = "body:before{ color: red; content: " +
-                    JSON.stringify(JSON.stringify(error)) + "; }"
-
-                return res.end(payload)
-            }
-        }
+                try {
+                    callback(null, payload.toCSS())
+                } catch (error) {
+                    callback(error)
+                }
+            })
+        })
+    },
+    sendError: function sendError(req, res, err) {
+        return res.end("body:before{ color: red; content: " +
+            JSON.stringify(JSON.stringify(err)) + "; }")
+    },
+    contentType: "text/css",
+    findResource: function findResource(req, res, opts) {
+        var pathname = url.parse(req.url).pathname
+        var parts = pathname.split("/")
+        return path.join(opts.root, parts[parts.length - 1])
     }
-}
-
-function less(location, callback) {
-    var parser = new Parser({
-        paths: [path.dirname(location)],
-        filename: path.basename(location)
-    })
-
-    fs.readFile(location, function (err, file) {
-        if (err) {
-            return callback(err)
-        }
-
-        parser.parse(String(file), callback)
-    })
-}
+})

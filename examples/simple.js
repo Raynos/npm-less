@@ -7,8 +7,11 @@ var ServeLess = require("../serve")
 
 var router = Router()
 
-router.addRoute("/less/:appName",
-    ServeLess(path.join(__dirname, "styles")))
+router.addRoute("/less/:appName", ServeLess({
+    root: path.join(__dirname, "styles"),
+    cache: true,
+    gzip: true
+}))
 router.addRoute("/", ecstatic({
     root: path.join(__dirname, "static"),
     autoIndex: true
