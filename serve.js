@@ -1,9 +1,9 @@
 var resolve = require("resolve")
 var path = require("path")
 var url = require("url")
+var CompiledFiles = require("compiled-files")
 
 var less = require("./less")
-var CompiledFiles = require("./lib/compiled-files")
 
 // /css/:appName
 module.exports = CompiledFiles({
