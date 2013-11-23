@@ -50,9 +50,9 @@ server.listen(9024, function () {
 
 ## MIT Licenced
 
-  [1]: https://secure.travis-ci.org/Colingo/npm-less.png
-  [2]: https://travis-ci.org/Colingo/npm-less
-  [3]: https://david-dm.org/Colingo/npm-less.png
-  [4]: https://david-dm.org/Colingo/npm-less
-  [5]: https://ci.testling.com/Colingo/npm-less.png
-  [6]: https://ci.testling.com/Colingo/npm-less
+  [1]: https://secure.travis-ci.org/Raynos/npm-less.png
+  [2]: https://travis-ci.org/Raynos/npm-less
+  [3]: https://david-dm.org/Raynos/npm-less.png
+  [4]: https://david-dm.org/Raynos/npm-less
+  [5]: https://ci.testling.com/Raynos/npm-less.png
+  [6]: https://ci.testling.com/Raynos/npm-less
