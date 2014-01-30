@@ -143,7 +143,7 @@ Parser.importer = function (file, currentFileInfo, callback, env) {
                 pathname = filepathWithLess
             } else if (fs.existsSync(pkginfo)) {
                 var info = JSON.parse(fs.readFileSync(pkginfo))
-                pathname = path.join(filepath, info.style || "index.less")
+                pathname = path.join(filepath, info.less || info.style || "index.less")
             } else if (fs.existsSync(indexFile)) {
                 pathname = indexFile
             }
