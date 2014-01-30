@@ -1,6 +1,6 @@
 {
   "name": "npm-less",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Fix LESS to import a la node require algorithm",
   "keywords": [],
   "author": "Raynos <raynos2@gmail.com>",
