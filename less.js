@@ -5,10 +5,11 @@ var Parser = require("./index")
 
 module.exports = less
 
-function less(location, callback) {
+function less(location, callback, preprocess) {
     var parser = new Parser({
         paths: [path.dirname(location)],
-        filename: path.basename(location)
+        filename: path.basename(location),
+        preprocess: preprocess
     })
 
     fs.readFile(location, function (err, file) {
