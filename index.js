@@ -174,6 +174,6 @@ Parser.importer = function (file, currentFileInfo, callback, env) {
 
 module.exports = function (opts) {
     var p = new Parser(opts)
-    Parser.preprocess = opts.preprocess || function (path, src) { return src }
+    Parser.preprocess = opts.preprocess
     return p
 }
