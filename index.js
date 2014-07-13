@@ -47,6 +47,9 @@ Parser.importer = function (file, currentFileInfo, callback, env) {
         newFileInfo.currentDirectory = pathname.replace(/[^\\\/]*$/, "")
         newFileInfo.filename = pathname
 
+        // avoid preprocessing the same file more than once
+        if (!env.contents[pathname]) data = Parser.preprocess(pathname, data)
+
         // Updating top importing parser content cache.
         env.contents[pathname] = data
         env.currentFileInfo = newFileInfo
@@ -169,4 +172,8 @@ Parser.importer = function (file, currentFileInfo, callback, env) {
     }
 }
 
-module.exports = Parser
+module.exports = function (opts) {
+    var p = new Parser(opts)
+    Parser.preprocess = opts.preprocess
+    return p
+}
