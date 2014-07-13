@@ -5,12 +5,16 @@ var Parser = require("./index")
 
 module.exports = less
 
-function less(location, callback, preprocess) {
-    var options = {
-        paths: [path.dirname(location)],
-        filename: path.basename(location),
-        preprocess: preprocess || passThrough
+function less(location, options, callback) {
+    if (typeof options === 'function') {
+        callback = options
+        options = {}
     }
+
+    options.paths = options.paths || [path.dirname(location)]
+    options.filename = options.filename || path.basename(location)
+    options.preprocess = options.preprocess || passThrough
+
     var parser = new Parser(options)
 
     fs.readFile(location, {encoding: "utf8"}, function (err, src) {
