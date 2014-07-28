@@ -117,7 +117,25 @@ Parser.importer = function (file, currentFileInfo, callback, env) {
         var folder = env.paths[0]
         var targetFile = file.replace(/\.less$/, "")
 
-        if (targetFile[0] !== ".") {
+        // Check for files first
+        var filepath = path.join(folder, targetFile)
+        var filepathWithLess = filepath + ".less"
+        var pkginfo = path.join(filepath, "package.json")
+        var indexFile = path.join(filepath, "index.less")
+
+        if (fs.existsSync(filepath) && fs.statSync(filepath).isFile()) {
+            pathname = filepath
+        } else if (fs.existsSync(filepathWithLess)) {
+            pathname = filepathWithLess
+        } else if (fs.existsSync(pkginfo)) {
+            var info = JSON.parse(fs.readFileSync(pkginfo))
+            pathname = path.join(filepath, info.less || info.style || "index.less")
+        } else if (fs.existsSync(indexFile)) {
+            pathname = indexFile
+        }
+
+        // If no files were found, check for modules
+        if (!pathname && targetFile[0] !== ".") {
             var filePath
 
             try {
@@ -134,22 +152,6 @@ Parser.importer = function (file, currentFileInfo, callback, env) {
             }
 
             pathname = filePath
-        } else {
-            var filepath = path.join(folder, targetFile)
-            var filepathWithLess = filepath + ".less"
-            var pkginfo = path.join(filepath, "package.json")
-            var indexFile = path.join(filepath, "index.less")
-
-            if (fs.existsSync(filepath) && fs.statSync(filepath).isFile()) {
-                pathname = filepath
-            } else if (fs.existsSync(filepathWithLess)) {
-                pathname = filepathWithLess
-            } else if (fs.existsSync(pkginfo)) {
-                var info = JSON.parse(fs.readFileSync(pkginfo))
-                pathname = path.join(filepath, info.less || info.style || "index.less")
-            } else if (fs.existsSync(indexFile)) {
-                pathname = indexFile
-            }
         }
 
         if (!pathname) {
