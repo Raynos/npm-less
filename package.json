@@ -17,15 +17,15 @@
     "email": "raynos2@gmail.com"
   },
   "dependencies": {
-    "request": "~2.21.0",
-    "resolve": "~0.3.1",
-    "less": "~1.4.0-b4",
+    "request": "~2.39.0",
+    "resolve": "~0.7.4",
+    "less": "~1.7.4",
     "compiled-files": "~0.1.1"
   },
   "devDependencies": {
-    "tape": "~1.0.2",
-    "routes-router": "~0.1.2",
-    "ecstatic": "~0.4.5"
+    "tape": "~2.13.4",
+    "routes-router": "~4.0.1",
+    "ecstatic": "~0.5.4"
   },
   "licenses": [
     {
