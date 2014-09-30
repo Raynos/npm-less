@@ -114,7 +114,7 @@ Parser.importer = function (file, currentFileInfo, callback, env) {
             }
         }
 
-        var folder = env.paths[0]
+        var folder = paths[0] || env.paths[0]
         var targetFile = file.replace(/\.less$/, "")
 
         // Check for files first
